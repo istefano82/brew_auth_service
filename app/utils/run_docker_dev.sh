@@ -3,6 +3,19 @@
 PROJECT="/usr/src/app"
 RUN="python3 ${PROJECT}/manage.py"
 
+db_check() {
+  if [ "$DATABASE" = "postgres" ]
+then
+    echo "Waiting for postgres..."
+
+    while ! nc -z $SQL_HOST $SQL_PORT; do
+      sleep 0.1
+    done
+
+    echo "PostgreSQL started"
+fi
+}
+
 run() {
   ${RUN} flush --no-input
   ${RUN} makemigrations
@@ -11,4 +24,4 @@ run() {
   ${RUN} runserver ${HOST}:${PORT}
 }
 
-run
+db_check & run
