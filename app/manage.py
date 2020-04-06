@@ -5,7 +5,7 @@ import sys
 
 
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'brew_auth_service.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend_settings.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
