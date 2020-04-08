@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import os
 import datetime
+import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,9 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "rest_framework",
-    "corsheaders",
-    "brew_auth"
+    'rest_framework',
+    'corsheaders',
+    'drf_yasg',
+    'brew_auth'
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES":
         ["rest_framework.permissions.AllowAny", ],
     "DEFAULT_PARSER_CLASSES": ["rest_framework.parsers.JSONParser", ],
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
 }
 
 JWT_AUTH = {
@@ -148,4 +150,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "/staticfiles/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
