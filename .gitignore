@@ -45,3 +45,4 @@ nodeLanguageServer/**
 nodeLanguageServer.*/**
 .env*
 app/db.sqlite3
+app/staticfiles/*
