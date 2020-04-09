@@ -2,11 +2,17 @@
 FROM python:3.7-alpine
 
 # set work directory
-WORKDIR /usr/src/app
+
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+
+
+ENV APP_HOME=/usr/src/app
+RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/staticfiles
+WORKDIR $APP_HOME
 
 # install postresql delepdencies
 RUN apk update \
