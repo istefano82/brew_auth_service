@@ -26,7 +26,7 @@ from rest_framework_jwt.views import (obtain_jwt_token, refresh_jwt_token,
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Snippets API",
+        title="Brew Auth API",
         default_version='v0',
         description="Brew Authentication API",
         terms_of_service="https://www.google.com/policies/terms/",
