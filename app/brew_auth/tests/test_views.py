@@ -1,13 +1,8 @@
-import unittest
+import json
 from unittest import mock
-from unittest.mock import call
 
-import requests
-from django.urls.base import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-from rest_framework_jwt.utils import jwt_decode_handler
-import json
 
 
 class BrewAuthApiUnittest(APITestCase):
@@ -28,13 +23,15 @@ class BrewAuthApiUnittest(APITestCase):
         }
 
     @mock.patch("brew_auth.views.UserCreateSerializer", autospec=True)
-    @mock.patch("brew_auth.views.api_settings.JWT_PAYLOAD_HANDLER", autospec=True)
-    @mock.patch("brew_auth.views.api_settings.JWT_ENCODE_HANDLER", autospec=True)
+    @mock.patch("brew_auth.views.api_settings.JWT_PAYLOAD_HANDLER",
+                autospec=True)
+    @mock.patch("brew_auth.views.api_settings.JWT_ENCODE_HANDLER",
+                autospec=True)
     def test_user_registration_ok(
-        self,
-        mock_jwtencode_handler,
-        mock_jwtpayload_handler,
-        mock_serializer
+            self,
+            mock_jwtencode_handler,
+            mock_jwtpayload_handler,
+            mock_serializer
     ):
         """It should be possible for user to register and obtain JWT auth token."""
         mock_jwt_encode_return = mock.Mock().return_value = '1234'
@@ -56,8 +53,8 @@ class BrewAuthApiUnittest(APITestCase):
 
     @mock.patch("brew_auth.views.UserCreateSerializer", autospec=True)
     def test_user_registration_user_data_validation_fail(
-        self,
-        mock_serializer
+            self,
+            mock_serializer
     ):
         """Bad request should be returned if user data validation fails"""
         mock_serializer.return_value.is_valid.return_value = False
@@ -68,4 +65,5 @@ class BrewAuthApiUnittest(APITestCase):
                                     )
         mock_serializer.return_value.is_valid.assert_called_once_with()
         self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
-        self.assertEqual(mock_serializer.return_value.errors, json.loads(response.content))
+        self.assertEqual(mock_serializer.return_value.errors,
+                         json.loads(response.content))

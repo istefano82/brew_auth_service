@@ -1,11 +1,6 @@
 import json
-import unittest
-from unittest import mock
-from unittest.mock import call
 
-import requests
 from django.contrib.auth import get_user_model
-from django.urls.base import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from rest_framework_jwt.utils import jwt_decode_handler

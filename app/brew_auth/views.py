@@ -1,9 +1,5 @@
-import json
-
-import requests
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
-from django.urls.base import reverse
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import decorators, permissions, status
@@ -21,7 +17,8 @@ registration_swagger_responses = {
 login_swagger_responses = {200: 'User Auth JWT token', 404: 'User not found'}
 
 
-@swagger_auto_schema(methods=['post'], request_body=UserCreateSerializer, responses=registration_swagger_responses)
+@swagger_auto_schema(methods=['post'], request_body=UserCreateSerializer,
+                     responses=registration_swagger_responses)
 @decorators.api_view(['POST'])
 @decorators.permission_classes([permissions.AllowAny])
 def registration(request):
@@ -45,8 +42,10 @@ def registration(request):
     request_body=openapi.Schema(
         type=openapi.TYPE_OBJECT,
         properties={
-            'username': openapi.Schema(type=openapi.TYPE_STRING, description='username'),
-            'password': openapi.Schema(type=openapi.TYPE_STRING, description='password'),
+            'username': openapi.Schema(type=openapi.TYPE_STRING,
+                                       description='username'),
+            'password': openapi.Schema(type=openapi.TYPE_STRING,
+                                       description='password'),
         },
     ))
 @decorators.api_view(['POST'])
